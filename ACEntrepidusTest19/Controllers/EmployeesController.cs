@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ACEntrepidusTest19.Models;
+using System.Globalization;
 
 namespace ACEntrepidusTest19.Controllers
 {
@@ -15,6 +16,15 @@ namespace ACEntrepidusTest19.Controllers
     public class EmployeesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+
+        [AcceptVerbs("Get", "Post")]
+        public JsonResult NotAfterToday(string DateOfBirth)
+        {
+            DateTime dDate;
+            bool isValid = DateTime.TryParseExact(DateOfBirth, "dd/M/yyyy",
+                CultureInfo.InvariantCulture, DateTimeStyles.None, out dDate) && dDate.Date <= DateTime.Now.Date;
+            return Json(isValid);
+        }
 
         // GET: Employees
         public async Task<ActionResult> Index()

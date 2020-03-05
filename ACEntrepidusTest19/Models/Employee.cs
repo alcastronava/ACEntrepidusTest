@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ACEntrepidusTest19.Consts;
+using ACEntrepidusTest19.Validations;
 
 namespace ACEntrepidusTest19.Models
 {
@@ -13,7 +14,7 @@ namespace ACEntrepidusTest19.Models
     {
         public int Id { get; set; }
 
-        //TODO Los mensajes podrían venir de un Resource para lograr el multilenguaje, pero para acelerar el desarrollo por ahora solo para este test, lo dejamos acá hardcoded
+        //TODO Los mensajes podrían venir de un Resource para lograr el multilenguaje, pero para acelerar el desarrollo por ahora, lo dejamos acá hardcoded
 
         [Display(Name = "Cédula")]
         [Required(ErrorMessage = "Por favor introduzca la {0}")]
@@ -46,7 +47,7 @@ namespace ACEntrepidusTest19.Models
         [DataType(DataType.Text)] 
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         [Remote("NotAfterToday", "Employees", ErrorMessage = "La {0} no puede ser posterior al día de hoy.")]
-        //[NotAfterToday(ErrorMessage = "La {0} no puede ser posterior al día de hoy.")]
+        [NotAfterToday(ErrorMessage = "La {0} no puede ser posterior al día de hoy.")]
         //[ModelBinder(BinderType = typeof(DateTimeModelBinder))]
         public DateTime ContractDate { get; set; }
 

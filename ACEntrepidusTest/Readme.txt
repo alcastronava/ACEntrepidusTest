@@ -1,4 +1,6 @@
-﻿## Características 
+﻿### Este proyecto fue realizado por Alfredo Castro para el test de Entrepidus, es una mini-webapp para CRUD de Empleados
+
+## Características 
 * VS 2019 y SQL Server 2019
 * ASP.NET MVC .NET Framework 4.7
 * Ajax mediante jquery.unobtrusive-ajax, PartialView actualizado via Ajax (_Index)
@@ -24,7 +26,7 @@
 * Pagina 404 personalizada
 * Pagina 500 personalizada
 
-##Instrucciones:
+## Instrucciones
 * Verificar que tiene instalado Visual Studio 2019 en su PC
 * Verificar que tiene instalado SQL Server 2019 en su PC y existe alguna instancia de BD
 * Descomprimir el archivo ZIP en alguna carpeta

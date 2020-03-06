@@ -26,7 +26,7 @@
 * Pagina 404 personalizada
 * Pagina 500 personalizada
 
-##Instrucciones
+## Instrucciones
 * Verificar que tiene instalado Visual Studio 2019 en su PC
 * Verificar que tiene instalado SQL Server 2019 en su PC y existe alguna instancia de BD
 * Descomprimir el archivo ZIP en alguna carpeta

@@ -71,12 +71,12 @@ namespace ACEntrepidusTest.Models
         [RegularExpression(RegExConsts.NameRegEx, ErrorMessage = "Introduzca un Nombre Válido")]
         public string FullName { get; set; }
 
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage = "Introduzca el Email.")]
+        [EmailAddress(ErrorMessage = "Introduzca una dirección de email válida.")]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Introduzca la contraseña.")]
         [StringLength(100, ErrorMessage = "La {0} debe tener al menos {2} caracteres.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Contraseña")]

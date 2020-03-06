@@ -11,7 +11,7 @@
 </p>
 
 <form id="formEmployeeList" data-ajax-url="/Employees/Index" method="get" data-ajax="true" data-ajax-method="get"
-      data-ajax-mode="replace" data-ajax-update="#employeesindex">
+      data-ajax-mode="replace" data-ajax-update="#employeesindex" data-ajax-complete="onCompletePaging">
 
     @Html.AntiForgeryToken()
 
@@ -30,6 +30,7 @@
             <input type="submit" class="btn btn-primary" value="Buscar" />
         </div>
     </div>
+
     <hr class="mt-1 mb-4" />
 
     @if (Model != null)
@@ -60,9 +61,7 @@
     <script type="text/javascript">
 
         $(function () {
-            $("#employeetable").tablesorter({
-                theme: 'bootstrap'
-            });
+            setTableSorter();
         });
 
         $('.datepicker').datepicker({
@@ -72,6 +71,16 @@
             autoclose: true,
             endDate: new Date()
         });
+
+        function setTableSorter() {
+            $("#employeetable").tablesorter({
+                theme: 'bootstrap'
+            });
+        }
+
+        function onCompletePaging() {
+            setTableSorter();
+        }
 
     </script>
 }

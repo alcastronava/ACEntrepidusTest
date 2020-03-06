@@ -2,6 +2,8 @@
 
 @using PagedList.Mvc;
 
+<span class="text-danger">@ViewBag.Message</span>
+
 @if (Model == null || Model.Count == 0)
 {
     <br />
@@ -13,7 +15,7 @@
 else
 {
     <div class="table-responsive">
-        <table id="employeetable" class="table tablesorter">
+        <table id="employeetable" class="table table-sm table-hover table-striped tablesorter">
             <thead>
                 <tr>
                     <th>
@@ -61,7 +63,7 @@ else
                  new { search = @ViewBag.search, start = @ViewBag.start, end = @ViewBag.end, page, pageSize = @ViewBag.pageSize }),
                     PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(
                         PagedListRenderOptions.ClassicPlusFirstAndLast,
-                        new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "employeesindex" }))
+                        new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "employeesindex", OnComplete = "onCompletePaging" }))
         </div>
         <div class="col-sm-12 col-md-6 mt-2">
             <div class="text-sm-left text-md-right">

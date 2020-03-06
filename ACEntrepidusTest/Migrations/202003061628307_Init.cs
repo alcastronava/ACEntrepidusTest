@@ -3,10 +3,28 @@ namespace ACEntrepidusTest.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class Init : DbMigration
     {
         public override void Up()
         {
+            CreateTable(
+                "dbo.Employees",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        DocumentId = c.String(nullable: false, maxLength: 256),
+                        FullName = c.String(nullable: false, maxLength: 256),
+                        Address = c.String(nullable: false, maxLength: 1024),
+                        EMail = c.String(),
+                        PhoneNumber = c.String(),
+                        ContractDate = c.DateTime(nullable: false),
+                        BirthDate = c.DateTime(nullable: false),
+                        IsFreelance = c.Boolean(nullable: false),
+                        PayRate = c.Decimal(nullable: false, storeType: "money"),
+                    })
+                .PrimaryKey(t => t.Id)
+                .Index(t => t.DocumentId, unique: true);
+            
             CreateTable(
                 "dbo.AspNetRoles",
                 c => new
@@ -35,6 +53,7 @@ namespace ACEntrepidusTest.Migrations
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
+                        FullName = c.String(nullable: false, maxLength: 256),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
@@ -89,11 +108,13 @@ namespace ACEntrepidusTest.Migrations
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropIndex("dbo.Employees", new[] { "DocumentId" });
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
+            DropTable("dbo.Employees");
         }
     }
 }

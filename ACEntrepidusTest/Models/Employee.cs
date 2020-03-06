@@ -33,7 +33,7 @@ namespace ACEntrepidusTest.Models
         [Display(Name = "Dirección")]
         [Required(ErrorMessage = "Por favor introduzca la {0}")]
         [StringLength(1024, ErrorMessage = "El campo {0} debe tener al menos {2} y un máximo de {1} caracteres.", MinimumLength = 2)]
-        [RegularExpression(RegExConsts.NameRegEx, ErrorMessage = "Introduzca una Dirección Válida")]
+        [RegularExpression(RegExConsts.AddressRegEx, ErrorMessage = "Introduzca una Dirección Válida")]
         public string Address { get; set; }
 
         [Display(Name = "Correo Electrónico")]

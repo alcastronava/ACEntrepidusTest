@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using ACEntrepidusTest.Models;
 using System.Globalization;
+using ACEntrepidusTest.Models;
 using ACEntrepidusTest.Extensions;
 using PagedList;
 using NLog;
@@ -44,6 +44,8 @@ namespace ACEntrepidusTest.Controllers
         {
             try
             {
+                ViewBag.Message = string.Empty;
+
                 var query = db.Employees.AsQueryable();
 
                 if (!string.IsNullOrWhiteSpace(search))
@@ -58,12 +60,24 @@ namespace ACEntrepidusTest.Controllers
                 }
                 if (start.HasValue && end.HasValue)
                 {
-                    query = query.Where(x => x.ContractDate.Date >= start.Value.Date && x.ContractDate.Date <= end.Value.Date);
+                    DateTime dtStart = start.Value.Date;
+                    DateTime dtEnd = end.Value.Date;
+                    if (dtStart < dtEnd) //Validar rango de fechas
+                    {
+                        query = query.Where(x =>
+                                        DbFunctions.TruncateTime(x.ContractDate) >= DbFunctions.TruncateTime(dtStart) &&
+                                        DbFunctions.TruncateTime(x.ContractDate) <= DbFunctions.TruncateTime(dtEnd));
+                    }
+                    else //TODO Mostrar un mensaje de error
+                    {
+                        start = end;
+                        ViewBag.Message = "La fecha de inicio debe ser menor a la fecha de fin.";
+                    }
                 }
 
                 int pageSizeNumber = pageSize ?? 5;
                 int pageNumber = page ?? 1;
-                query = query.OrderBy(x => x.DocumentId).ThenBy(x => x.FullName);
+                query = query.OrderBy(x => x.FullName);
 
                 ViewBag.search = search;
                 ViewBag.start = start;

@@ -27,7 +27,7 @@
     </div>
     <div class="row">
         <div class="form-group col-md-6">
-            @Html.LabelFor(m => m.Password, new { @class = "control-label" })
+            @Html.LabelFor(m => m.Password, new { @class = "control-label" }) <label class="text-muted small">(Al menos 6 caracteres alfanuméricos)</label>
             @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
             @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
         </div>
